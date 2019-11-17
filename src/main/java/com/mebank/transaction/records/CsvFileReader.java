@@ -3,9 +3,10 @@ package com.mebank.transaction.records;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.apache.commons.io.FileUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -28,8 +29,10 @@ public class CsvFileReader {
 	
 	public List<TransactionModel> read(String fileName) throws IOException, URISyntaxException {
 
-		URL fileURL = getClass().getResource("/"+fileName);
-        File csvFile = new File(fileURL.toURI());
+		File csvFileTemp = new File(fileName+"-temp");
+		//URL fileURL = getClass().getResource("/"+fileName);
+		FileUtils.copyInputStreamToFile(getClass().getResourceAsStream("/"+fileName), csvFileTemp);
+        File csvFile = new File(csvFileTemp.toURI());
         CsvSchema schema = CsvSchema.emptySchema().withHeader();
         return objMapper.readerFor(TransactionModel.class)
         				.with(schema) 

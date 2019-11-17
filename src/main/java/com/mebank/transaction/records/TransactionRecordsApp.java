@@ -18,7 +18,7 @@ public class TransactionRecordsApp {
 	/**
 	 * This method will accept the arguments in the following form
 	 * Running from Eclipse, set these in Program arguments
-	 * ACC334455 src/main/resources/transaction-records.csv 20/10/2018T12:00:00 20/10/2018T19:00:00
+	 * ACC334455 transaction-records.csv 20/10/2018T12:00:00 20/10/2018T19:00:00
 	 * 
 	 * @throws IOException 
 	 * @throws URISyntaxException 
