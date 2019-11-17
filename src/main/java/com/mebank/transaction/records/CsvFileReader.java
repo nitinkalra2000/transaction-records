@@ -1,8 +1,6 @@
 package com.mebank.transaction.records;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,17 +25,25 @@ public class CsvFileReader {
 		objMapper = new CsvMapper().registerModule(new JavaTimeModule());
 	}
 	
-	public List<TransactionModel> read(String fileName) throws IOException, URISyntaxException {
+	public List<TransactionModel> read(String fileName) throws Exception {
 
-		File csvFileTemp = new File(fileName+"-temp");
-		//URL fileURL = getClass().getResource("/"+fileName);
-		FileUtils.copyInputStreamToFile(getClass().getResourceAsStream("/"+fileName), csvFileTemp);
-        File csvFile = new File(csvFileTemp.toURI());
-        CsvSchema schema = CsvSchema.emptySchema().withHeader();
-        return objMapper.readerFor(TransactionModel.class)
-        				.with(schema) 
-        				.with(CsvParser.Feature.TRIM_SPACES).readValues(csvFile) 
-        				.readAll().stream()
-        				.map(item -> (TransactionModel) item).collect(Collectors.toList());
+		List<TransactionModel> fileData = null;
+		try {
+			File csvFileTemp = new File(fileName+"-temp");
+			//URL fileURL = getClass().getResource("/"+fileName);
+			FileUtils.copyInputStreamToFile(getClass().getResourceAsStream("/"+fileName), csvFileTemp);
+	        File csvFile = new File(csvFileTemp.toURI());
+	        CsvSchema schema = CsvSchema.emptySchema().withHeader();
+	        fileData = objMapper.readerFor(TransactionModel.class)
+	        				.with(schema) 
+	        				.with(CsvParser.Feature.TRIM_SPACES).readValues(csvFile) 
+	        				.readAll().stream()
+	        				.map(item -> (TransactionModel) item).collect(Collectors.toList());
+	        
+	    } catch(Exception ex) {
+	    	ex.printStackTrace();
+	    	throw ex;
+	    }
+		return fileData;
     }
 } 

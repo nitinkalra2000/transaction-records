@@ -1,8 +1,6 @@
 package com.mebank.transaction.records;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -19,15 +17,13 @@ public class TransactionRecordsApp {
 	 * This method will accept the arguments in the following form
 	 * Running from Eclipse, set these in Program arguments
 	 * ACC334455 transaction-records.csv 20/10/2018T12:00:00 20/10/2018T19:00:00
-	 * 
-	 * @throws IOException 
-	 * @throws URISyntaxException 
+	 * @throws Exception 
 	 */
-	public static void main(String args[]) throws IOException, URISyntaxException {
+	public static void main(String args[]) throws Exception {
 		TransactionRecordsApp.start(args);
 	}
 	
-	public static TransactionResult start(String args[]) throws IOException, URISyntaxException {
+	public static TransactionResult start(String args[]) throws Exception {
 		if(args.length != 4) {
 			System.out.println(" ** Enter all the arguments **");
 			System.out.println("accId fileName fromDate endDate");
@@ -49,7 +45,7 @@ public class TransactionRecordsApp {
 	    return result;
 	}
 	
-	private static TransactionResult executeCalculation(String accountId, String filePath, String startDate, String endDate) throws IOException, URISyntaxException {
+	private static TransactionResult executeCalculation(String accountId, String filePath, String startDate, String endDate) throws Exception {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HH:mm:ss");
 
