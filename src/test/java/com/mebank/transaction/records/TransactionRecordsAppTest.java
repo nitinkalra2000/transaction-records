@@ -5,11 +5,14 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
+import com.mebank.transaction.records.exception.TransactionRecordsException;
+import com.mebank.transaction.records.model.TransactionResultModel;
+
 /**
  * Test cases
  */
 public class TransactionRecordsAppTest {
-	TransactionResult result = null;
+	TransactionResultModel result = null;
 
 	@Test
     public void testSuccess1() throws Exception {
@@ -21,7 +24,7 @@ public class TransactionRecordsAppTest {
     }
 	
 	@Test
-    public void testFailure1() throws Exception {
+    public void testFailure1() throws TransactionRecordsException {
 		String args [] = {"ACC334455", "transaction-records.csv", "20/10/2018T12:00:00", "21/10/2018T19:00:00"};
 		result = TransactionRecordsApp.start(args);
 		

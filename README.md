@@ -21,3 +21,8 @@ Run
  - If wants to run directly from Jar, first compile using Maven then run the jar from
    target folder. Use jar-with-dependencies
  - java -cp transaction-records-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.mebank.transaction.records.TransactionRecordsApp  ACC334455 transaction-records.csv 20/10/2018T12:00:00 20/10/2018T19:00:00
+ 
+Test
+----
+ - Unit test cases can be executed through the class file - TransactionRecordsAppTest
+ - These test cases also gets executed when building through Maven.
